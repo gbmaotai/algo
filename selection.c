@@ -1,17 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "sort.h"
 
 #define DEBUG 
-void swap(int array[],int a ,int b)
-{ 
-int temp = array[b];    
-array[b] = array[a];    
-array[a] = temp;
-}
+
 
 void Selectionsort(int array[], int arraysize)
 {
+	printf("start Selectionsort ... \n");
 	int i,j;
 	int minpos;
 
@@ -32,20 +29,4 @@ void Selectionsort(int array[], int arraysize)
 	}
 }
 
-void printarray(int array[],int arraysize)
-{
-	int i;
-	for( i=0;i<arraysize;i++)
-	{
-		printf("%d ",array[i]);
-	}
-	printf("\n");
-}
-void main()
-{
-	int unsortarray[] = {90,87,56,34,97,2,6,8,1};
-	Selectionsort(unsortarray,9);
-	printarray(unsortarray,9);
-
-}
 
