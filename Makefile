@@ -1,18 +1,60 @@
+CC := gcc
+DBGFLAG = -g
+CCFLAG += -DSELECTION -I./inc
+CCOBJFLAG := $(CCFLAG) -c
 
-SRCS = $(wildcard *.c)
+BIN_PATH := bin
+OBJ_PATH := obj
+SRC_PATH := src
+DBG_PATH := debug
+INC_PATH := inc
 
-CFLAGS += -DSELECTION
+TARGET_NAME := sort
+TARGET := $(BIN_PATH)/$(TARGET_NAME)
+TARGET_DEBUG := $(DBG_PATH)/$(TARGET_NAME)
 
-OBJS := $(patsubst %.cpp,%.o,$(patsubst %.c,%.o,$(SRCS)))
-OUT := sort
+# src files & obj files
+SRC := $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
+OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
+OBJ_DEBUG := $(addprefix $(DBG_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
-all: $(OUT) $(OBJS) 
+# clean files list
+DISTCLEAN_LIST := $(OBJ) \
+                  $(OBJ_DEBUG)
+CLEAN_LIST := $(TARGET) \
+			  $(TARGET_DEBUG) \
+			  $(DISTCLEAN_LIST)
 
-$(OUT): $(OBJS) 
-	$(CC) $(LDFLAGS) $(CFLAGS)  $^ -o $@
-%.o: %.c
-	echo $(CC) $(CFLAGS) $<
-	$(CC) -c $(CFLAGS) $< -o $*.o
+# default rule
+default: all
 
+# non-phony targets
+$(TARGET): $(OBJ)
+	$(CC) $(CCFLAG) -o $@ $?
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	$(CC) $(CCOBJFLAG) -o $@ $<
+
+$(DBG_PATH)/%.o: $(SRC_PATH)/%.c
+	$(CC) $(CCOBJFLAG) $(DBGFLAG) -o $@ $<
+
+$(TARGET_DEBUG): $(OBJ_DEBUG)
+	$(CC) $(CCFLAG) $(DBGFLAG) $? -o $@
+
+# phony rules
+.PHONY: all
+all: $(TARGET)
+
+.PHONY: debug
+debug: $(TARGET_DEBUG)
+
+.PHONY: clean
 clean:
-	rm -f $(OBJS) $(OUT) 
+	@echo CLEAN $(CLEAN_LIST)
+	@rm -f $(CLEAN_LIST)
+
+.PHONY: distclean
+distclean:
+	@echo CLEAN $(CLEAN_LIST)
+	@rm -f $(DISTCLEAN_LIST)
+
