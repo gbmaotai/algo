@@ -12,7 +12,7 @@ void main()
 #endif
 
 #ifdef SELECTION
-    Selectionsort(unsortarray,arraysize);
+    Selectionsort2(unsortarray,arraysize);
 #endif
 	printarray(unsortarray,arraysize);
 

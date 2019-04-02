@@ -1,4 +1,5 @@
 *.o
 sort
 *.a
-
+*.bin
+.vscode/ipch
