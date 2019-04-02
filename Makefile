@@ -1,5 +1,6 @@
 CC := gcc
 DBGFLAG = -g
+#CCFLAG += -DBUBBLE -I./inc
 CCFLAG += -DSELECTION -I./inc
 CCOBJFLAG := $(CCFLAG) -c
 

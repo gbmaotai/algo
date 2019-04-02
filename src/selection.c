@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "sort.h"
 
-#define DEBUG 
+//#define DEBUG 
 
 //min
 void Selectionsort(int array[], int arraysize)
@@ -42,15 +42,20 @@ void Selectionsort2(int array[], int arraysize)
 	{    
 		minpos = i;    
 		maxpos = arraysize-i-1; 
-		for(j=i+1;j<arraysize-i;j++)    
+		for(j=i;j<arraysize-i;j++)    
 		{        
 			if(array[minpos] > array[j])            
 				minpos = j;    
 			if(array[maxpos] < array[j])            
 				maxpos = j;    
-		}   
-		swap(array, i, minpos);
-		swap(array, arraysize-i-1, maxpos);
+		} 
+		if(i!=minpos)  
+			swap(array, i, minpos);
+		if(maxpos!=i)
+			swap(array, arraysize-i-1, maxpos);
+		else
+			swap(array, arraysize-i-1, minpos);
+		
 #ifdef DEBUG
 		printarray(array,arraysize);
 #endif
