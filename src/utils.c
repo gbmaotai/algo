@@ -49,11 +49,12 @@ bool autocheck(int size,mysort pmysort)
 	int* array = createrandomArray(size);
 	int* array2 = (int* )malloc(sizeof(int)*size);
 	int i;
+
 	memcpy(array2,array,sizeof(int)*size);
 
-	printarray(array,size);
+//	printarray(array,size);
 	stlsort(array,size);
-
+	
 	pmysort(array2,size);
 
 	for(i=0;i<size;i++)
@@ -63,7 +64,33 @@ bool autocheck(int size,mysort pmysort)
 			free(array2);
 			return false;
 		}	
-	printarray(array2,size);
+//	printarray(array2,size);
+	free(array);
+	free(array2);
+	return true;
+
+}
+
+bool checkperformance(int size,mysort pmysort)
+{
+	int* array = createrandomArray(size);
+	int* array2 = (int* )malloc(sizeof(int)*size);
+	int i;
+	time_t start ,end ;
+	double cost;
+	memcpy(array2,array,sizeof(int)*size);
+
+	time(&start);
+	for(i=0;i<10000;i++)
+	{
+		memcpy(array2,array,sizeof(int)*size);
+		pmysort(array2,size);
+	}
+	time(&end);
+ 	cost=difftime(end,start);
+
+	printf("%f \n",cost);
+
 	free(array);
 	free(array2);
 	return true;

@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "sort.h"
 
-//#define DEBUG 
+#define DEBUG 
 
 //min
 void Selectionsort(int array[], int arraysize)

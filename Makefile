@@ -1,7 +1,9 @@
 CC := gcc
 DBGFLAG = -g
 #CCFLAG += -DBUBBLE -I./inc
-CCFLAG += -DSELECTION -I./inc
+#CCFLAG += -DSELECTION -I./inc
+#CCFLAG += -DINSERTION -I./inc
+CCFLAG += -DSHELL -I./inc
 CCOBJFLAG := $(CCFLAG) -c
 
 BIN_PATH := bin
