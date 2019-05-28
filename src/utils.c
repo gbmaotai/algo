@@ -34,6 +34,19 @@ int* createrandomArray(int arraysize)
 	return array;
 }
 
+#define BASE 50
+#define MAX_NUM 100
+
+int* createCountrandomArray(int arraysize)
+{
+	int* array= (int* )malloc(sizeof(int)*arraysize);
+	int i;
+	srand((int)time(NULL));
+	for(i=0;i<arraysize;i++)
+		array[i] = (random()%MAX_NUM)+BASE;
+	return array;
+}
+
 int comp(const void*a,const void*b)
 {
     return *(int*)a-*(int*)b;
@@ -46,7 +59,11 @@ void stlsort(int array[],int arraysize)
 
 bool autocheck(int size,mysort pmysort)
 {
+#ifdef COUNTSORT  
+	int* array = createCountrandomArray(size);
+#else
 	int* array = createrandomArray(size);
+#endif
 	int* array2 = (int* )malloc(sizeof(int)*size);
 	int i;
 

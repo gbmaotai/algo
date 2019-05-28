@@ -3,7 +3,10 @@ DBGFLAG = -g
 #CCFLAG += -DBUBBLE -I./inc
 #CCFLAG += -DSELECTION -I./inc
 #CCFLAG += -DINSERTION -I./inc
-CCFLAG += -DSHELL -I./inc
+#CCFLAG += -DSHELL -I./inc
+#CCFLAG += -DMERGE -I./inc
+#CCFLAG += -DQUICKSORT -I./inc
+CCFLAG += -DCOUNTSORT -I./inc
 CCOBJFLAG := $(CCFLAG) -c
 
 BIN_PATH := bin

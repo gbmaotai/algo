@@ -6,8 +6,8 @@
 #define arraysize 15
 void main()
 {
-	int unsortarray[] = {90,87,56,34,97,56,6,8,1,4,9,45,80,30,9};
-    
+//	int unsortarray[] = {56,87,56,34,97,90,6,8,1,4,9,45,80,30,9};
+    int unsortarray[] = {56,50,130,100,100,149,62,56,111,79,130,60,80,130,100};
 #ifdef BUBBLE
 //    bubblesort(unsortarray,arraysize);
    if(autocheck(100,bubblesort))
@@ -40,6 +40,33 @@ void main()
         printf("shellsort success \n");
     else
         printf("shellsort failed \n");
+
+#endif
+
+#ifdef MERGE
+    //mergesort(unsortarray,arraysize);
+    if(checkperformance(10000,mergesort))
+        printf("mergesort success \n");
+    else
+        printf("mergesort failed \n");
+
+#endif
+
+#ifdef QUICKSORT
+ //   quicksort(unsortarray,arraysize);
+    if(autocheck(10000,quicksort))
+        printf("quicksort success \n");
+    else
+        printf("quicksort failed \n");
+
+#endif
+
+#ifdef COUNTSORT
+    //countsort(unsortarray,arraysize);
+    if(autocheck(10000,countsort))
+        printf("countsort success \n");
+    else
+        printf("countsort failed \n");
 
 #endif
 //	printarray(unsortarray,arraysize);
