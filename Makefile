@@ -1,13 +1,18 @@
 CC := gcc
+CPP := g++
 DBGFLAG = -g
+CCFLAG += -I./inc
 #CCFLAG += -DBUBBLE -I./inc
 #CCFLAG += -DSELECTION -I./inc
 #CCFLAG += -DINSERTION -I./inc
 #CCFLAG += -DSHELL -I./inc
 #CCFLAG += -DMERGE -I./inc
 #CCFLAG += -DQUICKSORT -I./inc
-CCFLAG += -DCOUNTSORT -I./inc
-CCOBJFLAG := $(CCFLAG) -c
+#CCFLAG += -DCOUNTSORT -I./inc
+CPPFLAG += -DOBSERVER_PATTERN -I./inc
+
+CCOBJFLAG := $(CCFLAG)
+CPPOBJFLAG := $(CPPFLAG)
 
 BIN_PATH := bin
 OBJ_PATH := obj
@@ -36,10 +41,13 @@ default: all
 
 # non-phony targets
 $(TARGET): $(OBJ)
-	$(CC) $(CCFLAG) -o $@ $?
+	$(CPP) $(CCFLAG) -o $@ $?
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CCOBJFLAG) -o $@ $<
+	$(CC) -c $(CCOBJFLAG) -o $@ $<
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.cpp
+	$(CPP) -c $(CPPOBJFLAG) -o $@ $<
 
 $(DBG_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CCOBJFLAG) $(DBGFLAG) -o $@ $<

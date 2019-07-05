@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "sort.h"
+#include "observer.h"
 
 #define arraysize 15
-void main()
+int main()
 {
 //	int unsortarray[] = {56,87,56,34,97,90,6,8,1,4,9,45,80,30,9};
     int unsortarray[] = {56,50,130,100,100,149,62,56,111,79,130,60,80,130,100};
@@ -71,4 +72,8 @@ void main()
 #endif
 //	printarray(unsortarray,arraysize);
 
+#ifdef OBSERVER_PATTERN
+    Child* oChild = new Child();
+    oChild->wakeupnotifyObserver();
+#endif
 }
