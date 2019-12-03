@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "sort.h"
 #include "observer.h"
+#include "link.h"
 
 #define arraysize 15
 int main()
@@ -75,5 +76,9 @@ int main()
 #ifdef OBSERVER_PATTERN
     Child* oChild = new Child();
     oChild->wakeupnotifyObserver();
+#endif
+
+#ifdef TESTLINK
+    testLink();
 #endif
 }

@@ -2,14 +2,16 @@ CC := gcc
 CPP := g++
 DBGFLAG = -g
 CCFLAG += -I./inc
-#CCFLAG += -DBUBBLE -I./inc
-#CCFLAG += -DSELECTION -I./inc
-#CCFLAG += -DINSERTION -I./inc
-#CCFLAG += -DSHELL -I./inc
-#CCFLAG += -DMERGE -I./inc
-#CCFLAG += -DQUICKSORT -I./inc
-#CCFLAG += -DCOUNTSORT -I./inc
-CPPFLAG += -DOBSERVER_PATTERN -I./inc
+CPPFLAG += -I./inc
+#CCFLAG += -DBUBBLE 
+#CCFLAG += -DSELECTION 
+#CCFLAG += -DINSERTION 
+#CCFLAG += -DSHELL 
+#CCFLAG += -DMERGE 
+#CCFLAG += -DQUICKSORT 
+#CCFLAG += -DCOUNTSORT 
+#CPPFLAG += -DOBSERVER_PATTERN 
+CPPFLAG += -DTESTLINK 
 
 CCOBJFLAG := $(CCFLAG)
 CPPOBJFLAG := $(CPPFLAG)
@@ -41,7 +43,7 @@ default: all
 
 # non-phony targets
 $(TARGET): $(OBJ)
-	$(CPP) $(CCFLAG) -o $@ $?
+	$(CPP) $(CPPFLAG) -o $@ $?
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) -c $(CCOBJFLAG) -o $@ $<
@@ -50,10 +52,13 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.cpp
 	$(CPP) -c $(CPPOBJFLAG) -o $@ $<
 
 $(DBG_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CCOBJFLAG) $(DBGFLAG) -o $@ $<
+	$(CC) -c $(CCOBJFLAG) $(DBGFLAG) -o $@ $<
+
+$(DBG_PATH)/%.o: $(SRC_PATH)/%.cpp
+	$(CPP) -c $(CPPOBJFLAG) $(DBGFLAG) -o $@ $<
 
 $(TARGET_DEBUG): $(OBJ_DEBUG)
-	$(CC) $(CCFLAG) $(DBGFLAG) $? -o $@
+	$(CPP) $(CPPFLAG) $(DBGFLAG) $? -o $@
 
 # phony rules
 .PHONY: all
